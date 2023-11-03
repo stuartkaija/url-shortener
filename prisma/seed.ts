@@ -50,12 +50,21 @@ const userData: Prisma.UserCreateInput[] = [
 
 async function main() {
   console.log(`Start seeding ...`)
-  for (const u of userData) {
-    const user = await prisma.user.create({
-      data: u,
-    })
-    console.log(`Created user with id: ${user.id}`)
-  }
+
+  const test = await prisma.url.create({
+    data: {
+      key: '1w2w3w4',
+      long_url: 'https://www.example.com',
+      short_url: 'http://localhost:3000/1w2w3w4'
+    }
+  })
+
+  // for (const u of userData) {
+  //   const user = await prisma.user.create({
+  //     data: u,
+  //   })
+  //   console.log(`Created user with id: ${user.id}`)
+  // }
   console.log(`Seeding finished.`)
 }
 

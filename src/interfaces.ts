@@ -1,5 +1,5 @@
 export interface urlData {
   "key": string,
-  "longUrl": string,
-  "shortUrl": string
+  "long_url": string,
+  "short_url": string
 }

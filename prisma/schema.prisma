@@ -27,7 +27,8 @@ model Post {
 }
 
 model Url {
-  key       String @unique
+  key       String   @unique
+  createdAt DateTime @default(now())
   long_url  String
   short_url String
 }

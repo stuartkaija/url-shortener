@@ -1,5 +1,6 @@
 import { Prisma, PrismaClient } from '@prisma/client'
 import express from 'express'
+import cors from 'cors';
 
 import { generateHash, generateShortUrl, validateUrl } from './helperFunctions'
 
@@ -7,8 +8,10 @@ const prisma = new PrismaClient()
 const app = express()
 
 app.use(express.json())
+app.use(cors());
 
 app.post(`/url`, async(req, res) => {
+  console.log('post endpoint')
   const { longUrl } = req.body;
 
   if (!validateUrl(longUrl)) {
@@ -77,8 +80,8 @@ app.delete(`/:key`, async(req, res) => {
   res.status(204).json(result);
 })
 
-const server = app.listen(3000, () =>
+const server = app.listen(3001, () =>
   console.log(`
-🚀 Server ready at: http://localhost:3000
+🚀 Server ready at: http://localhost:3001
 ⭐️ See sample requests: http://pris.ly/e/ts/rest-express#3-using-the-rest-api`),
 )

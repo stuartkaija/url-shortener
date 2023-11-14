@@ -6,7 +6,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.use(helmet());
   app.enableCors({
-    origin: 'http://localhost:3000'
+    origin: 'https://www.lil-url.net'
   });
   await app.listen(3000);
 }

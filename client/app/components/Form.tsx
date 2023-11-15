@@ -15,7 +15,7 @@ export default function Form({
     setShortUrl('');
 
     try {
-      const response = await fetch(`https://url-shortener-api-8nj0.onrender.com`, {
+      const response = await fetch(`https://lil-url.net/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

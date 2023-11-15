@@ -7,7 +7,7 @@ export function generateHash(longUrl: string): string {
 };
 
 export function generateShortUrl(hash: string): string {
-  const shortUrl = `http://localhost:3000/${hash}`
+  const shortUrl = `https://www.lil-url.net/${hash}`
   return shortUrl;
 };
 

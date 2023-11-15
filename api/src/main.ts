@@ -4,9 +4,15 @@ import helmet from 'helmet';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  // app.use(helmet());
+  app.use(helmet({
+    contentSecurityPolicy: {
+      directives: {
+        "defaultSrc": "'self'"
+      }
+    }
+  }));
   app.enableCors({
-    origin: 'https://www.lil-url.net'
+    origin: 'https://lil-url.net'
   });
   await app.listen(3000);
 }

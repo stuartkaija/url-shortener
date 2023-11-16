@@ -1,10 +1,12 @@
 import React from 'react'
-import { Box, Typography } from '@mui/material'
+import { Box, Typography, Link } from '@mui/material'
 
 export default function ShortUrl({
-  shortUrl
+  shortUrl,
+  errorMessage
 }: {
-  shortUrl: string 
+  shortUrl: string
+  errorMessage: string
 }) {
   return (
     <Box
@@ -12,9 +14,27 @@ export default function ShortUrl({
         width: '100%'
       }}
     >
-      <Typography sx={{color: 'rgba(0, 0, 0, 0.6)'}}>Your shortened URL: </Typography>
+      <Typography
+        sx={{
+          color: 'rgba(0, 0, 0, 0.6)',
+          margin: '1rem 0rem 1rem'
+        }}
+      >
+        Your shortened URL:
+      </Typography>
       {shortUrl &&
-        <a href={shortUrl} target='_blank' rel='noopener noreferrer'>{shortUrl}</a>
+        <Link
+          href={shortUrl}
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          {shortUrl}
+        </Link>
+      }
+      {errorMessage &&
+        <Typography>
+          An error occurred! {errorMessage}
+        </Typography>
       }
     </Box>
   )

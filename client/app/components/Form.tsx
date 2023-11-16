@@ -51,16 +51,15 @@ export default function Form({
     <form className={styles.form} name="url-form" onSubmit={formHandler}>
       <InputLabel
         sx={{
-          margin: '0rem 0rem 1rem'
+          margin: '1rem 0rem 0rem'
         }}
       >
-        Enter a URL to be shortened
+        Enter a URL to shorten
       </InputLabel>
       <Box
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          // alignItems: { md: 'center' },
           width: { xs: '100%' },
         }}
       >
@@ -68,7 +67,7 @@ export default function Form({
           sx={{
             // margin: { xs: '0rem 0rem 2rem', md: '0rem' },
             margin: '1rem 0rem',
-            width: {md: '20rem'}
+            width: { md: '20rem' }
           }}
           type="text"
           id="urlInput"
@@ -90,14 +89,6 @@ export default function Form({
           Submit
         </Button>
       </Box>
-      {/* {formError &&
-        <Typography sx={{
-          color: '#d32f2f'
-        }}
-        >
-          Please enter a valid URL
-        </Typography>
-      } */}
     </form>
   )
 }

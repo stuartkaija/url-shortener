@@ -1,4 +1,7 @@
 import { useState, Dispatch, SetStateAction } from 'react'
+import { Box, InputLabel, TextField, Button, Typography } from '@mui/material'
+import isURL from 'validator/lib/isURL';
+import styles from './Form.module.css'
 
 export default function Form({
   setShortUrl,
@@ -8,9 +11,17 @@ export default function Form({
   setErrorMessage: Dispatch<SetStateAction<string>>
 }) {
   const [longUrl, setLongUrl] = useState('');
+  const [formError, setFormError] = useState(false);
 
   const formHandler = async (event: React.SyntheticEvent) => {
     event.preventDefault();
+
+    if (longUrl.length === 0) {
+      setFormError(true);
+      return;
+    }
+
+    setFormError(false);
     setErrorMessage('');
     setShortUrl('');
 
@@ -37,15 +48,56 @@ export default function Form({
   }
 
   return (
-    <form name="url-form" onSubmit={formHandler}>
-      <label htmlFor="urlInput">Enter URL</label>
-      <input
-        type="text"
-        id="urlInput"
-        value={longUrl}
-        onChange={(e) => setLongUrl(e.target.value)}
-      />
-      <button type="submit">Submit</button>
+    <form className={styles.form} name="url-form" onSubmit={formHandler}>
+      <InputLabel
+        sx={{
+          margin: '0rem 0rem 1rem'
+        }}
+      >
+        Enter a URL to be shortened
+      </InputLabel>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          // alignItems: { md: 'center' },
+          width: { xs: '100%' },
+        }}
+      >
+        <TextField
+          sx={{
+            // margin: { xs: '0rem 0rem 2rem', md: '0rem' },
+            margin: '1rem 0rem',
+            width: {md: '20rem'}
+          }}
+          type="text"
+          id="urlInput"
+          value={longUrl}
+          onChange={(e) => setLongUrl(e.target.value)}
+          error={formError}
+          helperText={formError && 'Please enter a valid URL'}
+        />
+        <Button
+          sx={{
+            // margin: { xs: '0rem', md: '0rem' },
+            margin: '0rem 0rem 1rem',
+            width: { md: '20rem' },
+            height: '3rem'
+          }}
+          variant='contained'
+          type='submit'
+        >
+          Submit
+        </Button>
+      </Box>
+      {/* {formError &&
+        <Typography sx={{
+          color: '#d32f2f'
+        }}
+        >
+          Please enter a valid URL
+        </Typography>
+      } */}
     </form>
   )
 }

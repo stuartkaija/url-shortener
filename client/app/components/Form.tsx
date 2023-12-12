@@ -5,10 +5,12 @@ import styles from './Form.module.css'
 
 export default function Form({
   setShortUrl,
-  setErrorMessage
+  setErrorMessage,
+  setIsLoading
 }: {
   setShortUrl: Dispatch<SetStateAction<string>>
   setErrorMessage: Dispatch<SetStateAction<string>>
+  setIsLoading: Dispatch<SetStateAction<boolean>>
 }) {
   const [longUrl, setLongUrl] = useState('');
   const [formError, setFormError] = useState(false);
@@ -21,9 +23,15 @@ export default function Form({
       return;
     }
 
+    if (!isURL(longUrl, { require_protocol: true })) {
+      setFormError(true);
+      return;
+    }
+
     setFormError(false);
     setErrorMessage('');
     setShortUrl('');
+    setIsLoading(true);
 
     try {
       const response = await fetch(`https://lil-url.net/`, {
@@ -44,6 +52,8 @@ export default function Form({
 
     } catch (error: unknown) {
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -65,7 +75,6 @@ export default function Form({
       >
         <TextField
           sx={{
-            // margin: { xs: '0rem 0rem 2rem', md: '0rem' },
             margin: '1rem 0rem',
             width: { md: '20rem' }
           }}
@@ -78,7 +87,6 @@ export default function Form({
         />
         <Button
           sx={{
-            // margin: { xs: '0rem', md: '0rem' },
             margin: '0rem 0rem 1rem',
             width: { md: '20rem' },
             height: '3rem'

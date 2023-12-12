@@ -2,25 +2,24 @@
 
 import { useState } from 'react';
 import { Box, Divider } from '@mui/material';
-import styles from './page.module.css'
 
 import ShortUrl from './components/ShortUrl';
 import Form from './components/Form';
 import Footer from './components/Footer';
 
 export default function Home() {
-  const [shortUrl, setShortUrl] = useState('https://lil-url.net/050fbe97');
+  const [shortUrl, setShortUrl] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   return (
     <Box
+      component='main'
       sx={{
         minHeight: '100vh',
-        padding: { xs: '1rem', md: '4rem', lg: '7rem' },
+        padding: { xs: '1rem', md: '4rem 4rem 1rem', lg: '7rem 7rem 1rem' },
         display:'flex',
         flexDirection:'column',
-        border: '1px solid salmon'
       }}
     >
       <h1>URL Shortener</h1>
@@ -29,7 +28,6 @@ export default function Home() {
         role='presentation'
       />
       <Box
-        component='main'
         sx={{
           height:'100%',
           flex:'1',
@@ -48,10 +46,12 @@ export default function Home() {
           <Form
             setShortUrl={setShortUrl}
             setErrorMessage={setErrorMessage}
+            setIsLoading={setIsLoading}
           />
           <ShortUrl
             shortUrl={shortUrl}
             errorMessage={errorMessage}
+            isLoading={isLoading}
           />
         </Box>
         <Footer />

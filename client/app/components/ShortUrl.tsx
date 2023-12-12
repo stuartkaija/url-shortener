@@ -1,12 +1,14 @@
 import React from 'react'
-import { Box, Typography, Link } from '@mui/material'
+import { Box, Typography, Link, LinearProgress } from '@mui/material'
 
 export default function ShortUrl({
   shortUrl,
-  errorMessage
+  errorMessage,
+  isLoading
 }: {
   shortUrl: string
   errorMessage: string
+  isLoading: boolean
 }) {
   return (
     <Box
@@ -22,6 +24,9 @@ export default function ShortUrl({
       >
         Your shortened URL:
       </Typography>
+      {isLoading &&
+        <LinearProgress/>
+      }
       {shortUrl &&
         <Link
           href={shortUrl}
@@ -32,8 +37,12 @@ export default function ShortUrl({
         </Link>
       }
       {errorMessage &&
-        <Typography>
-          An error occurred! {errorMessage}
+        <Typography
+          sx={{
+            color: '#d32f2f'
+          }}
+        >
+          {errorMessage}
         </Typography>
       }
     </Box>

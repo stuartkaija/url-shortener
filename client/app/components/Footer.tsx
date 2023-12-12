@@ -1,31 +1,59 @@
 import React from 'react';
-import Image from 'next/image';
 import { Box, Typography, Link } from '@mui/material';
-import LinkedInIcon from '@component/public/linkedin_black_logo_icon_147114.png';
-import GitHubIcon from '@component/public/github-mark.png'
+import LinkedInIcon from '@component/public/icons/linked-in-icon.png';
+import GitHubIcon from '@component/public/icons/github-mark.png';
 
 export default function Footer() {
   return (
     <Box
+      component='footer'
       sx={{
-        marginTop: 'auto'
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center'
       }}
     >
+      <Box>
+        <Link
+          href='https://www.linkedin.com/in/stuartkaija'
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          <Box
+            component='img'
+            src={LinkedInIcon.src}
+            alt='LinkedIn icon'
+            height={32}
+            mr={0.5}
+            sx={{
+              filter: 'grayscale(100%) brightness(0%)',
+              ':hover': {
+                filter: 'grayscale(100%) brightness(100%)',
+              }
+            }}
+          />
+        </Link>
+        <Link
+          href='https://www.github.com/stuartkaija'
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          <Box
+            component='img'
+            src={GitHubIcon.src}
+            alt='GitHub icon'
+            height={32}
+            ml={0.5}
+            sx={{
+              filter: 'grayscale(100%) brightness(0%)',
+              ':hover': {
+                filter: 'opacity(60%)'
+              }
+            }}
+          />
+        </Link>
+      </Box>
       <Typography>Built by Stuart Kaija</Typography>
-      <Link
-        href='https://www.linkedin.com/in/stuartkaija'
-        target='_blank'
-        rel='noopener noreferrer'
-      >
-        <img src={LinkedInIcon.src} alt="LinkedIn icon" width={32} height={32} />
-      </Link>
-      <Link
-        href='https://www.github.com/stuartkaija'
-        target='_blank'
-        rel='noopener noreferrer'
-      >
-        <img src={GitHubIcon.src} alt="GitHubIcon" width={32} height={32} />
-      </Link>
     </Box>
   )
 }

@@ -1,5 +1,5 @@
 import { useState, Dispatch, SetStateAction } from 'react'
-import { Box, InputLabel, TextField, Button, Typography } from '@mui/material'
+import { Box, InputLabel, TextField, Button } from '@mui/material'
 import isURL from 'validator/lib/isURL';
 import styles from './Form.module.css'
 
@@ -47,7 +47,7 @@ export default function Form({
       if (response.ok) {
         setShortUrl(data.short_url);
       } else {
-        setErrorMessage(`${data.statusCode}, ${data.error}: ${data.message}`)
+        setErrorMessage(`${data.statusCode}, ${data.message}`)
       }
 
     } catch (error: unknown) {

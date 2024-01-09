@@ -1,10 +1,12 @@
-import { Controller, Post, Get, Delete, Body, Param, Res, NotFoundException, UnprocessableEntityException, HttpCode, Logger } from '@nestjs/common';
+import { Controller, Post, Get, Delete, Body, Param, Res, NotFoundException, UnprocessableEntityException, HttpCode, Logger, UseGuards } from '@nestjs/common';
+import { ThrottlerGuard } from '@nestjs/throttler';
 import { Response } from 'express';
 import { AppService } from './app.service';
 import { CreateUrlDto } from './url.dto';
 import { validateUrl } from './helperFunctions';
 
 @Controller()
+@UseGuards(ThrottlerGuard)
 export class AppController {
   private readonly logger = new Logger(AppController.name);
   constructor(private readonly appService: AppService) { }

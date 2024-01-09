@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { ThrottlerModule } from '@nestjs/throttler';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PrismaService } from './prisma.service';
-import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 
 @Module({
@@ -10,6 +11,10 @@ import { join } from 'path';
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'client')
     }),
+    ThrottlerModule.forRoot([{
+      ttl: 60000,
+      limit: 100,
+    }])
   ],
   controllers: [AppController],
   providers: [AppService, PrismaService],
